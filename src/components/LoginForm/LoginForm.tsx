@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuthContext } from '../hooks';
+import { useAuthContext } from '../../hooks';
 
 export const LoginForm: React.FC = () => {
     const { handleLogin } = useAuthContext();

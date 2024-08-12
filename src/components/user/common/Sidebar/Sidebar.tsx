@@ -1,8 +1,8 @@
 import React from 'react';
 import { Home, CreditCard, DollarSign, Bell, User, Settings, LogOut, ShoppingBag } from 'lucide-react';
-import { useTabContext } from '../../../hooks/useTabContext';
-import { Tab } from '../../../contexts/types';
-import { useAuthContext } from '../../../hooks';
+import { useTabContext } from '../../../../hooks/useTabContext';
+import { Tab } from '../../../../contexts/types';
+import { useAuthContext } from '../../../../hooks';
 
 const sidebarLinks = [
     { icon: <Home />, label: 'Home', key: Tab.HOME },

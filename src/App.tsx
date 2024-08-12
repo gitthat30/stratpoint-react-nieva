@@ -7,18 +7,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate, Outlet } from 'react-
 import { Sidebar, Header } from './components/user/common';
 import { TabProvider } from './contexts';
 
-// const TestComponent2: React.FC = () => {
-//   const { handleLogout, email} = useAuthContext();
-//   return (
-//     <div>
-//       Logged In {email}
-//       <button onClick={handleLogout}>Logout</button>
-//     </div>
-//   );
-// };
-
 function App() {
-
   return (
     <AuthProvider>
       <Router>

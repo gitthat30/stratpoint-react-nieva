@@ -4,6 +4,8 @@ import { Login } from './pages';
 import { AuthProvider } from './contexts/AuthContext';
 import { useAuthContext } from './hooks';
 import { BrowserRouter as Router, Route, Routes, Navigate, Outlet } from 'react-router-dom';
+import { Sidebar } from './components/user/common/Sidebar';
+import { TabProvider } from './contexts';
 
 // const TestComponent2: React.FC = () => {
 //   const { handleLogout, email} = useAuthContext();
@@ -60,6 +62,9 @@ function AppRoutes() {
 const TestComponentDash : React.FC = () => {
   return (
       <div>
+          <TabProvider>
+            <Sidebar />
+          </TabProvider>
           <h1>Dashboard</h1>
       </div>
   );

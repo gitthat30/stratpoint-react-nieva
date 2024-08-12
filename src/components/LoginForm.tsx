@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuthContext } from '../contexts/AuthContext';
+import { useAuthContext } from '../hooks';
 
-export const Login: React.FC = () => {
+export const LoginForm: React.FC = () => {
     const { handleLogin } = useAuthContext();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

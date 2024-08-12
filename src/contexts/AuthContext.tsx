@@ -1,7 +1,7 @@
-import React, { createContext, ReactNode, useContext, useState } from 'react';
+import React, { createContext, ReactNode, useState } from 'react';
 import { AuthContextType } from './types';
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children } : { children : ReactNode}) {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(localStorage.getItem('token') === 'true'); // Use null for loading state
@@ -22,23 +22,9 @@ export function AuthProvider({ children } : { children : ReactNode}) {
         setEmail('');
     }
 
-    if (isAuthenticated === null) {
-        return <div>Loading...</div>; // Or a spinner component
-    }
-
     return (
         <AuthContext.Provider value={{ isAuthenticated, email, handleLogin, handleLogout }}>
             {children}
         </AuthContext.Provider>
     );
-}
-
-export function useAuthContext() {
-    const context = useContext(AuthContext);
-
-    if (!context) {
-        throw new Error('useAuthContext must be used within an AuthProvider');   
-    }
-
-    return context;
 }

@@ -4,7 +4,7 @@ import { Login } from './pages';
 import { AuthProvider } from './contexts/AuthContext';
 import { useAuthContext } from './hooks';
 import { BrowserRouter as Router, Route, Routes, Navigate, Outlet } from 'react-router-dom';
-import { Sidebar, Header } from './components/user/common';
+import { Sidebar, Header } from './components';
 import { TabProvider } from './contexts';
 
 function App() {

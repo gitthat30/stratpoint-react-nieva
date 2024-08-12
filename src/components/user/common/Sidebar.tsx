@@ -18,7 +18,7 @@ export function Sidebar() {
     const { activeTab, setActiveTab } = useTabContext();
     const { handleLogout } = useAuthContext();
     return (
-        <div className="w-64 bg-white shadow-md">
+        <>
             <div className="p-4">
                 <h1 className="text-2xl font-bold text-blue-600">DigiWallet</h1>
             </div>
@@ -42,6 +42,6 @@ export function Sidebar() {
                 Logout
                 </button>
             </div>
-        </div>
+        </>
     )
 }

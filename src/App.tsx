@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Login } from './pages';
-import { Home } from './pages/user';
+import { Home, Account } from './pages/user';
 import { AuthProvider, TabProvider, Tab } from './contexts';
 import { useAuthContext, useTabContext } from './hooks';
 import { BrowserRouter as Router, Route, Routes, Navigate, Outlet, useNavigate } from 'react-router-dom';
@@ -50,15 +50,6 @@ function AppRoutes() {
   );
 }
 
-const TestComponentDash2 : React.FC = () => {
-  return (
-      <div>
-          <h1>Dashboard22</h1>
-      </div>
-  );
-};
-
-
 export const UserRoutes : React.FC = () => {
   const { setActiveTab } = useTabContext();
 
@@ -79,9 +70,9 @@ export const UserRoutes : React.FC = () => {
             <Header />                   
             <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
               <Routes>
-                <Route path="/" element={<Home />} />
+                <Route path="/" element={<Navigate to ="/dashboard/home" />} />
                 <Route path="/home" element={<Home />} />
-                <Route path="/accounts" element ={<TestComponentDash2 />} />
+                <Route path="/accounts" element ={<Account />} />
               </Routes>
             </main> 
         </div>

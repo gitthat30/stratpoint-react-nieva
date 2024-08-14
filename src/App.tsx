@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
-import './index.css';
 import { Login } from './pages';
-import { AuthProvider } from './contexts/AuthContext';
-import { useAuthContext } from './hooks';
-import { BrowserRouter as Router, Route, Routes, Navigate, Outlet } from 'react-router-dom';
+import { Home } from './pages/user';
+import { AuthProvider, TabProvider, Tab } from './contexts';
+import { useAuthContext, useTabContext } from './hooks';
+import { BrowserRouter as Router, Route, Routes, Navigate, Outlet, useNavigate } from 'react-router-dom';
 import { Sidebar, Header } from './components';
-import { TabProvider } from './contexts';
 
 function App() {
   return (
@@ -37,24 +36,19 @@ function AppRoutes() {
   const { isAuthenticated } = useAuthContext();
 
   return (
-    <Routes>
-      <Route element={<SecureRoutes />}>
-        <Route path="/dashboard/*" element={<UserRoutes />} />
-      </Route>
-      
-      <Route path="/" element={isAuthenticated ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} />
-      <Route path="/login" element={<Login />} />
-    </Routes>
+    <TabProvider>
+      <Routes>
+        <Route element={<SecureRoutes />}>
+          <Route path="/dashboard/*" element={<UserRoutes />} />
+        </Route>
+        
+        <Route path="/" element={isAuthenticated ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </TabProvider>
+    
   );
 }
-
-const TestComponentDash : React.FC = () => {
-  return (
-      <div>
-        Test
-      </div>
-  );
-};
 
 const TestComponentDash2 : React.FC = () => {
   return (
@@ -66,27 +60,33 @@ const TestComponentDash2 : React.FC = () => {
 
 
 export const UserRoutes : React.FC = () => {
+  const { setActiveTab } = useTabContext();
+
+  const navigate = useNavigate();
+
+  function handleTabChange(key : Tab) {
+    setActiveTab(key);
+    navigate(key.toString());
+  }
+
   return (
-    <div className="flex h-screen bg-gray-100">
-      <div className="w-64 bg-white shadow-md">
-        <TabProvider>
-          <Sidebar />   
-        </TabProvider>
-      </div>
+      <div className="flex h-screen bg-gray-100">
+        <div className="w-64 bg-white shadow-md">
+            <Sidebar handleTabChange={handleTabChange}/>   
+        </div>
 
-      <div className="flex-1 overflow-y-auto">
-        <TabProvider>
-          <Header />                     
-          <Routes>
-            
-            <Route path="/" element={<TestComponentDash />} />
-            <Route path="/test" element ={<TestComponentDash2 />} />
-
-          </Routes>
-        </TabProvider>
+        <div className="flex-1 overflow-y-auto">
+            <Header />                   
+            <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/accounts" element ={<TestComponentDash2 />} />
+              </Routes>
+            </main> 
+        </div>
+        
       </div>
-      
-    </div>
 );
 }
 

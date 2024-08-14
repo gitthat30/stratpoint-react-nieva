@@ -14,8 +14,13 @@ const sidebarLinks = [
     { icon: <Settings />, label: 'Settings', key: Tab.SETTINGS }
   ];
 
-export function Sidebar() {
-    const { activeTab, setActiveTab } = useTabContext();
+
+interface SidebarProps {
+    handleTabChange: (key: Tab) => void;
+}
+
+export function Sidebar({ handleTabChange }: SidebarProps) {
+    const { activeTab } = useTabContext();
     const { handleLogout } = useAuthContext();
     return (
         <>
@@ -29,7 +34,7 @@ export function Sidebar() {
                     className={`flex items-center w-full py-2 px-4 ${
                     activeTab === link.key ? 'bg-blue-100 text-blue-600' : 'text-gray-600 hover:bg-gray-100'
                     }`}
-                    onClick={() => setActiveTab(link.key)}
+                    onClick={() => handleTabChange(link.key)}
                 >
                     {React.cloneElement(link.icon, { size: 18, className: 'mr-2' })}
                     {link.label}

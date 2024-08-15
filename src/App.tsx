@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import { Login } from './pages';
-import { Home, Account } from './pages/user';
+import { Home, Account, StorePurchase, Transactions } from './pages/user';
 import { AuthProvider, TabProvider, Tab } from './contexts';
 import { useAuthContext, useTabContext } from './hooks';
 import { BrowserRouter as Router, Route, Routes, Navigate, Outlet, useNavigate } from 'react-router-dom';
 import { Sidebar, Header } from './components';
-import { Transactions } from './pages/user/Transactions';
 
 function App() {
   return (
@@ -75,6 +74,7 @@ export const UserRoutes : React.FC = () => {
                 <Route path="/home" element={<Home />} />
                 <Route path="/accounts" element={<Account />} />
                 <Route path="/transactions" element={<Transactions />} />
+                <Route path="/store-purchase" element={<StorePurchase />} />
               </Routes>
             </main> 
         </div>

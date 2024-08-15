@@ -8,12 +8,12 @@ interface SearchBarProps {
 
 export function SearchBar( { searchTerm, setSearchTerm }: SearchBarProps ) {
     return (
-        <div className="flex items-center bg-white shadow rounded-lg p-2">
+        <div className="flex border border-border items-center bg-background shadow rounded-lg p-2">
             <Search className="text-gray-400 mr-2" size={20} />
             <input
             type="text"
             placeholder="Search transactions..."
-            className="flex-grow outline-none"
+            className="flex-grow outline-none bg-background text-card-text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             />

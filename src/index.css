@@ -1,3 +1,47 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+.light {
+    --background: 243, 244, 246;
+    --card-background: 255, 255, 255;
+    --card-background-shade: 249, 250, 251;
+    --sidebar: 255, 255, 255;
+    --sidebar-hover: 243 244 246;
+    --sidebar-highlighted: 219 234 254;
+    --header: 255, 255, 255;
+    --header-text: 17, 24, 39;
+    --card-header: 12, 12, 12;
+    --border: 229, 231, 235;
+    --card-text: 79, 70, 229;
+    --card-text-small: 107, 114, 128;
+    --currency-background: 220, 252, 231;
+    --currency-text: 22 101 52;
+    --button: 79 70 229;
+    --button-hover: 67 56 202;
+    --button-text: 255 255 255;
+    --currency-button: 22 163 74;
+    --currency-button-hover: 21 128 61
+}
+
+.dark {
+    --background: 32, 32, 32;
+    --card-background: 37, 37, 37;
+    --card-background-shade: 40, 40, 40;
+    --sidebar: 30, 30, 30;
+    --sidebar-hover: 243 244 243;
+    --sidebar-highlighted: 243 243 243;
+    --header: 30, 30, 30;
+    --header-text: 235, 235, 235;
+    --card-header: 235, 235, 235;
+    --border: 182, 182, 182 ;
+    --card-text: 225, 225, 225;
+    --card-text-small: 182, 182, 182;
+    --currency-background: 37, 37, 37;
+    --currency-text: 235, 235, 235;
+    --button: 235 235 235;
+    --button-hover: 182 182 182;
+    --button-text: 32 32 32;
+    --currency-button: 235 235 235;
+    --currency-button-hover: 182 182 182
+}

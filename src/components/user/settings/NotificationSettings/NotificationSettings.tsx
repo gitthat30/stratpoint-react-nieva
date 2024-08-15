@@ -9,17 +9,17 @@ interface NotifactionSettingsProps {
 
 export function NotificationSettings( { settings, handleNotificationChange }: NotifactionSettingsProps) {
     return (
-      <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+      <div className="bg-card-background shadow overflow-hidden sm:rounded-lg">
         <div className="px-4 py-5 sm:px-6">
-          <h3 className="text-lg leading-6 font-medium text-gray-900 flex items-center">
+          <h3 className="text-lg leading-6 font-medium text-header-text flex items-center">
             <Bell className="mr-2" size={20} /> Notification Settings
           </h3>
         </div>
-        <div className="border-t border-gray-200 px-4 py-5 sm:p-0">
+        <div className="border-t border-border px-4 py-5 sm:p-0">
           <dl className="sm:divide-y sm:divide-gray-200">
             {Object.entries(settings.notifications).map(([key, value]) => (
               <div key={key} className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt className="text-sm font-medium text-gray-500 capitalize">{key} Notifications</dt>
+                <dt className="text-sm font-medium text-card-text-small capitalize">{key} Notifications</dt>
                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                   <button
                     onClick={() => handleNotificationChange(key as keyof typeof settings.notifications)}

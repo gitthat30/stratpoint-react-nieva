@@ -3,6 +3,7 @@ import { Home, CreditCard, DollarSign, Bell, User, Settings, LogOut, ShoppingBag
 import { useTabContext } from '../../../../hooks/useTabContext';
 import { Tab } from '../../../../contexts/types';
 import { useAuthContext } from '../../../../hooks';
+// import { Menu } from 'react-burger-menu'
 
 const sidebarLinks = [
     { icon: <Home />, label: 'Home', key: Tab.HOME },
@@ -32,7 +33,7 @@ export function Sidebar({ handleTabChange }: SidebarProps) {
                 <button
                     key={link.key}
                     className={`flex items-center w-full py-2 px-4 ${
-                    activeTab === link.key ? 'bg-blue-100 text-blue-600' : 'text-gray-600 hover:bg-gray-100'
+                    activeTab === link.key ? 'bg-sidebar-highlighted text-blue-600' : 'text-header-text hover:bg-sidebar-hover hover:text-black'
                     }`}
                     onClick={() => handleTabChange(link.key)}
                 >
@@ -42,7 +43,7 @@ export function Sidebar({ handleTabChange }: SidebarProps) {
                 ))}
             </nav>
             <div className="absolute bottom-0 w-64 p-4">
-                <button className="flex items-center text-gray-600 hover:text-red-500" onClick={handleLogout}>
+                <button className="flex items-center text-header-text hover:text-red-500" onClick={handleLogout}>
                 <LogOut className="mr-2" size={18} />
                 Logout
                 </button>

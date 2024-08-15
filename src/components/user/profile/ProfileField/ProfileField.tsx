@@ -12,19 +12,21 @@ interface ProfileFieldProps {
 
 export function ProfileField( { icon, label, isEditing, value, name, handleChange }: ProfileFieldProps ) {
     return (
-        <div className={`px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 ${name === 'email' ? 'bg-white' : 'bg-gray-50'}`}>
-            <dt className="text-sm font-medium text-gray-500 flex items-center">
+        <div className={`px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 ${name === 'email' ? 'bg-card-background' : 'bg-card-background-shade'}`}>
+            <dt className="text-sm font-medium text-header-text flex items-center">
               {icon}
-              {label}
+              <div className="px-2">
+                {label}
+              </div>
             </dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            <dd className="mt-1 text-sm text-header-text sm:mt-0 sm:col-span-2">
               {isEditing ? (
                 <input
                   type={name === 'email' ? 'email' : name === 'phone' ? 'tel' : 'text'}
                   name={name}
                   value={value}
                   onChange={handleChange}
-                  className="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full border border-border px-2 bg-background rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                 />
               ) : (
                 value

@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { ProfileField } from "../../components/user/profile";
 import { User, Mail, Phone } from "lucide-react";
 
-type Profile = {
+type ProfileType = {
     name: string,
     email: string,
     phone: string
 }
 
 export function Profile() {
-    const [profile, setProfile] = useState<Profile>({
+    const [profile, setProfile] = useState<ProfileType>({
         name: 'John Doe',
         email: 'john.doe@example.com',
         phone: '+1 (555) 123-4567',
@@ -34,12 +34,12 @@ export function Profile() {
     }
 
     return (
-        <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+        <div className="bg-card-background shadow overflow-hidden sm:rounded-lg">
             <div className="px-4 py-5 sm:px-6">
-                <h3 className="text-lg leading-6 font-medium text-gray-900">User Profile</h3>
+                <h3 className="text-lg leading-6 font-medium text-header-text">User Profile</h3>
             </div>
 
-            <div className="border-t border-gray-200">
+            <div className="border-t border-border">
                 <dl>
                     <ProfileField 
                         label="Full Name"
@@ -69,18 +69,18 @@ export function Profile() {
                     />  
                 </dl>
             </div>
-            <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+            <div className="px-4 py-3 bg-card-background text-right sm:px-6">
                 {isEditing ? (
                 <button
                     onClick={handleSave}
-                    className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                    className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-button-white bg-button hover:bg-button-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 >
                     Save
                 </button>
                 ) : (
                 <button
                     onClick={handleEdit}
-                    className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                    className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700text-button-white bg-button hover:bg-button-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 >
                     Edit
                 </button>

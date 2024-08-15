@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Login } from './pages';
 import { Home, Account, StorePurchase, Transactions, Notifications, Profile, Settings } from './pages/user';
 import { AuthProvider, TabProvider, Tab, SettingsProvider } from './contexts';
-import { useAuthContext, useTabContext } from './hooks';
+import { useAuthContext, useSettingsContext, useTabContext } from './hooks';
 import { BrowserRouter as Router, Route, Routes, Navigate, Outlet, useNavigate } from 'react-router-dom';
 import { Sidebar, Header } from './components';
 
@@ -10,7 +10,9 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        <AppRoutes />
+        <div className='dark'>
+          <AppRoutes />
+        </div>
       </Router>
     </AuthProvider>
   );
@@ -55,6 +57,7 @@ function AppRoutes() {
 export const UserRoutes : React.FC = () => {
   const { setActiveTab } = useTabContext();
 
+  const { settings } = useSettingsContext();
   const navigate = useNavigate();
 
   function handleTabChange(key : Tab) {
@@ -63,8 +66,9 @@ export const UserRoutes : React.FC = () => {
   }
 
   return (
-      <div className="flex h-screen bg-gray-100">
-        <div className="w-64 bg-white shadow-md">
+    <div className={settings.darkMode ? 'dark' : 'light'}>
+      <div className="flex h-screen bg-background">
+        <div className="w-50 bg-sidebar">
             <Sidebar handleTabChange={handleTabChange}/>   
         </div>
 
@@ -83,8 +87,8 @@ export const UserRoutes : React.FC = () => {
               </Routes>
             </main> 
         </div>
-        
       </div>
+    </div>
 );
 }
 

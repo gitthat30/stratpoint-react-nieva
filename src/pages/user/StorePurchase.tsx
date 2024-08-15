@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { StoreCard, Store, Item, ScanningModeEnum } from "../../components/user/storepurchase";
+import { StoreCard, Store, Item, ScanningModeEnum } from "../../components/user/store-purchase";
 
 export function StorePurchase() {
     const [scanningMode, setScanningMode] = useState<ScanningModeEnum | null>(null); // 'store' or 'item'

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Login } from './pages';
-import { Home, Account, StorePurchase, Transactions } from './pages/user';
-import { AuthProvider, TabProvider, Tab } from './contexts';
+import { Home, Account, StorePurchase, Transactions, Notifications, Profile, Settings } from './pages/user';
+import { AuthProvider, TabProvider, Tab, SettingsProvider } from './contexts';
 import { useAuthContext, useTabContext } from './hooks';
 import { BrowserRouter as Router, Route, Routes, Navigate, Outlet, useNavigate } from 'react-router-dom';
 import { Sidebar, Header } from './components';
@@ -37,14 +37,16 @@ function AppRoutes() {
 
   return (
     <TabProvider>
-      <Routes>
-        <Route element={<SecureRoutes />}>
-          <Route path="/dashboard/*" element={<UserRoutes />} />
-        </Route>
-        
-        <Route path="/" element={isAuthenticated ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
+      <SettingsProvider>
+        <Routes>
+          <Route element={<SecureRoutes />}>
+            <Route path="/dashboard/*" element={<UserRoutes />} />
+          </Route>
+          
+          <Route path="/" element={isAuthenticated ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </SettingsProvider>
     </TabProvider>
     
   );
@@ -75,6 +77,9 @@ export const UserRoutes : React.FC = () => {
                 <Route path="/accounts" element={<Account />} />
                 <Route path="/transactions" element={<Transactions />} />
                 <Route path="/store-purchase" element={<StorePurchase />} />
+                <Route path="/notifications" element={<Notifications />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/settings" element={<Settings />} />
               </Routes>
             </main> 
         </div>

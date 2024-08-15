@@ -19,3 +19,19 @@ export interface TabContextType {
     activeTab : Tab;
     setActiveTab : (tab : Tab) => void;
 }
+
+export type SettingsType = {
+    notifications: {
+        email: boolean,
+        push: boolean,
+        sms: boolean
+    };
+    language: string;
+    twoFactor: boolean;
+    darkMode: boolean;
+};
+
+export interface SettingsContextType {
+    settings: SettingsType,
+    setSettings : (settings: SettingsType) => void
+}

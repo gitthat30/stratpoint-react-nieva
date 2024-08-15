@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AccountCard, AccountType, LinkedBanksCard, LinkedBanksCardType, PaymentMethodCard, PaymentMethodType } from '../../components/user/account'
+import { AccountCard, AccountType, LinkedBanksCard, LinkedBanksCardType, PaymentMethodCard, PaymentMethodType } from '../../components/user/accounts'
 export function Account() {
     const [accounts] = useState<AccountType[]>([
         { id: 1, name: 'Checking Account', type: 'Checking', balance: 2500 },

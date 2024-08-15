@@ -5,6 +5,7 @@ import { AuthProvider, TabProvider, Tab } from './contexts';
 import { useAuthContext, useTabContext } from './hooks';
 import { BrowserRouter as Router, Route, Routes, Navigate, Outlet, useNavigate } from 'react-router-dom';
 import { Sidebar, Header } from './components';
+import { Transactions } from './pages/user/Transactions';
 
 function App() {
   return (
@@ -72,7 +73,8 @@ export const UserRoutes : React.FC = () => {
               <Routes>
                 <Route path="/" element={<Navigate to ="/dashboard/home" />} />
                 <Route path="/home" element={<Home />} />
-                <Route path="/accounts" element ={<Account />} />
+                <Route path="/accounts" element={<Account />} />
+                <Route path="/transactions" element={<Transactions />} />
               </Routes>
             </main> 
         </div>

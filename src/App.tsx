@@ -5,14 +5,13 @@ import { AuthProvider, TabProvider, Tab, SettingsProvider } from './contexts';
 import { useAuthContext, useSettingsContext, useTabContext } from './hooks';
 import { BrowserRouter as Router, Route, Routes, Navigate, Outlet, useNavigate } from 'react-router-dom';
 import { Sidebar, Header } from './components';
+import { slide as Menu } from 'react-burger-menu';
 
 function App() {
   return (
     <AuthProvider>
       <Router>
-        <div className='dark'>
           <AppRoutes />
-        </div>
       </Router>
     </AuthProvider>
   );
@@ -67,12 +66,21 @@ export const UserRoutes : React.FC = () => {
 
   return (
     <div className={settings.darkMode ? 'dark' : 'light'}>
+      <div className="fixed h-15 p-4 bg-sidebar w-full lg:hidden grid grid-cols-2 items-center">
+            <h1 className="inline-block text-2xl font-bold text-blue-600">DigiWallet</h1>
+      </div>
       <div className="flex h-screen bg-background">
-        <div className="w-50 bg-sidebar">
+        <div className="lg:hidden bg-sidebar">
+          <Menu burgerBarClassName='bg-card-text' className='bg-sidebar' burgerButtonClassName='fixed right-4' pageWrapId='page-wrap' noOverlay>
+            <Sidebar handleTabChange={handleTabChange} />
+          </Menu>
+        </div>
+
+        <div className="w-64 bg-sidebar hidden lg:block">
             <Sidebar handleTabChange={handleTabChange}/>   
         </div>
 
-        <div className="flex-1 overflow-y-auto">
+        <div className="flex-1 overflow-y-auto pt-16">
             <Header />                   
             <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
               <Routes>

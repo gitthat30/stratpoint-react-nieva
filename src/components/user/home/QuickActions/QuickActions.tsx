@@ -9,7 +9,7 @@ interface QuickActionsProps {
 
 export function QuickActions( { handleSendMoney, handleRequestMoney, handleAddFunds } : QuickActionsProps) {
     return (
-        <div className="bg-card-background overflow-hidden shadow rounded-lg">
+        <div className="bg-card-background overflow-hidden shadow rounded-lg max-w-sm:flex md:max-w-md:flex">
             <div className="px-4 py-5 sm:p-6">
             <h3 className="text-lg font-medium text-header-text mb-4">Quick Actions</h3>
             <div className="space-y-2">

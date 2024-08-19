@@ -16,10 +16,15 @@ export function Transactions() {
 
     return (
         <div className="space-y-6">
-            <SearchBar 
-                searchTerm={searchTerm}
-                setSearchTerm={setSearchTerm}/>
-            <TransactionCard transactions={filteredTransactions}/>
+            <div className="px-3">
+                <SearchBar 
+                    searchTerm={searchTerm}
+                    setSearchTerm={setSearchTerm}/>
+            </div>
+            
+            <div className="px-3">
+                <TransactionCard transactions={filteredTransactions}/>
+            </div>
         </div>
     )
 }

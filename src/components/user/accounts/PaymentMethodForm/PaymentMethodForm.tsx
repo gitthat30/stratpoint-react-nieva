@@ -10,16 +10,15 @@ export function PaymenMethodForm( { handleAddPaymentMethod }: PaymentMethodFormP
     const [newCardExpiry, setNewCardExpiry] = useState('');
     const [newCardCVV, setNewCardCVV] = useState('');
     return (
-        <form onSubmit={(e) => handleAddPaymentMethod(e, newCardNumber, newCardExpiry, newCardCVV)} className="space-y-2">
+        <form onSubmit={(e) => handleAddPaymentMethod(e, newCardNumber, newCardExpiry, newCardCVV)} className="grid grid-cols-2 gap-3">
             <input
               type="text"
               value={newCardNumber}
               onChange={(e) => setNewCardNumber(e.target.value)}
               placeholder="Card Number"
-              className="w-full shadow-sm border px-2 bg-background text-card-text focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-border rounded-md"
+              className="col-span-2 justify-center w-full shadow-sm border px-2 bg-background text-card-text focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-border rounded-md"
             />
-            <div className="flex space-x-2">
-              <input
+            <input
                 type="text"
                 value={newCardExpiry}
                 onChange={(e) => setNewCardExpiry(e.target.value)}
@@ -33,8 +32,7 @@ export function PaymenMethodForm( { handleAddPaymentMethod }: PaymentMethodFormP
                 placeholder="CVV"
                 className="flex-grow border px-2 bg-background text-card-text shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-border rounded-md"
               />
-            </div>
-            <button type="submit" className="w-full inline-flex items-center justify-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-button-text bg-button hover:bg-button-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <button type="submit" className="col-span-2 w-full inline-flex items-center justify-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-button-text bg-button hover:bg-button-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
               <CreditCard size={18} className="mr-2" />
               Add Payment Method
             </button>

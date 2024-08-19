@@ -21,7 +21,7 @@ export function AccountCard( { accounts, handleRemoveAccount, handleAddAccount }
             <div className="px-4 py-5 sm:px-6">
                 <h3 className="text-lg leading-6 font-medium text-card-header">Your Accounts</h3>
             </div>
-            <div className="border-t border-border">
+            <div className="w-max:flex border-t border-border">
                 <ul className="divide-y divide-border">
                     {accounts.map(account => (
                     <li key={account.id} className="px-4 py-4 sm:px-6">

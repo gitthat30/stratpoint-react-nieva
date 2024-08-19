@@ -13,8 +13,8 @@ export interface TransactionCardProps {
 
 export function TransactionCard( { transactions }: TransactionCardProps ) {
     return (
-        <div className="bg-card-background shadow overflow-hidden sm:rounded-lg">
-            <table className="min-w-full divide-y divide-border">
+        <div className="bg-card-background overflow-x-auto shadow sm:rounded-lg">
+            <table className="w-full divide-y divide-border">
                 <thead className="bg-card-background">
                     <tr>
                     <th className="px-6 py-3 text-left text-xs font-medium text-card-text uppercase tracking-wider">Date</th>
@@ -25,9 +25,9 @@ export function TransactionCard( { transactions }: TransactionCardProps ) {
             <tbody className="bg-card-background divide-y divide-border">
                 {transactions.map((transaction) => (
                 <tr key={transaction.id}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-card-header">{transaction.date}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-card-header">{transaction.description}</td>
-                    <td className={`px-6 py-4 whitespace-nowrap text-sm text-right font-medium ${transaction.amount >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                    <td className="px-6 py-4 text-sm text-card-header">{transaction.date}</td>
+                    <td className="px-6 py-4 text-sm text-card-header">{transaction.description}</td>
+                    <td className={`px-6 py-4 text-sm text-right font-medium ${transaction.amount >= 0 ? 'text-green-600' : 'text-red-600'}`}>
                     ${Math.abs(transaction.amount).toFixed(2)}
                     </td>
                 </tr>

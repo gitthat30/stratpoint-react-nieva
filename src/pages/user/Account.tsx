@@ -16,18 +16,26 @@ export function Account() {
 
     return (
         <div className="space-y-6">
-            <AccountCard 
+            <div className="px-6">
+                <AccountCard 
                 accounts={accounts} 
                 handleRemoveAccount={() => {}}
                 handleAddAccount={() => {}}/>
-            <LinkedBanksCard 
+            </div>
+
+            <div className="px-6">
+                <LinkedBanksCard 
                 linkedBanks={linkedBanks}
                 handleRemoveBank={() => {} }
                 handleLinkBank={() => {}}/>
-            <PaymentMethodCard 
+            </div>
+
+            <div className="px-6">
+                <PaymentMethodCard 
                 paymentMethods={paymentMethods}
                 handleRemovePaymentMethod={() => {} }
                 handleAddPaymentMethod={() => {}}/>
+            </div>
         </div>
     )
 }

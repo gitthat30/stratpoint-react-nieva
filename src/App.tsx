@@ -6,6 +6,7 @@ import { useAuthContext, useSettingsContext, useTabContext } from './hooks';
 import { BrowserRouter as Router, Route, Routes, Navigate, Outlet, useNavigate } from 'react-router-dom';
 import { Sidebar, Header } from './components';
 import { slide as Menu } from 'react-burger-menu';
+import { Register } from './pages/Register';
 
 function App() {
   return (
@@ -19,11 +20,11 @@ function App() {
 
 
 function SecureRoutes() {
-  const { isAuthenticated, email } = useAuthContext();
+  const { isAuthenticated, user } = useAuthContext();
 
   useEffect(() => {
     console.log('SecureRoutes rendered. isAuthenticated:', isAuthenticated);
-    console.log('SecureRoutes rendered. email:', email);
+    console.log('SecureRoutes rendered. email:', user);
   }, [isAuthenticated]);
 
 
@@ -46,6 +47,7 @@ function AppRoutes() {
           
           <Route path="/" element={isAuthenticated ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </SettingsProvider>
     </TabProvider>

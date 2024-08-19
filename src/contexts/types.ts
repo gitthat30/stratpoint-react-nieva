@@ -1,8 +1,16 @@
 export interface AuthContextType {
     isAuthenticated : boolean;
-    email : string | null;
-    handleLogin : (email : string) => void;
+    user : User | null;
+    handleLogin : (email : string, password : string) => void;
     handleLogout : () => void;
+}
+
+export interface User {
+    id: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+    role: string;
 }
 
 export enum Tab {

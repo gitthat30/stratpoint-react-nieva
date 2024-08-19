@@ -1,19 +1,21 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuthContext } from '../../hooks';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-export const LoginForm: React.FC = () => {
-    const { handleLogin } = useAuthContext();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+interface LoginProps {
+  email : string;
+  password: string;
+  setEmail: (email: string) => void;
+  setPassword: (password: string) => void;
+  handleLogin: (email: string, password: string) => void;
+  navigate: (navigate: string) => void;
+}
 
-    const navigate = useNavigate();
+export function LoginForm( { email, password, setEmail, setPassword, handleLogin }: LoginProps ) {
 
-    const handleSubmit = (e: React.FormEvent) => {
+    function handleSubmit(e : React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         console.log('Login attempt:', email, password);
-        handleLogin(email); 
-        navigate('/dashboard');
+        handleLogin(email, password); 
     };
     
     return (

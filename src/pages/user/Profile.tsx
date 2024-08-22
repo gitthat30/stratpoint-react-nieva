@@ -4,7 +4,6 @@ import { User, Mail } from "lucide-react";
 import { useAuthContext } from "../../hooks";
 import { KYCField } from "../../components/user/profile/KYCField/KYCField";
 import { KYCService } from "../../services";
-import { useNavigate } from "react-router-dom";
 
 type ProfileType = {
     name: string | null,
@@ -17,8 +16,6 @@ export function Profile() {
     const [ isApproved, setIsApproved ] = useState<boolean>(false);
 
     const kycService = new KYCService();
-
-    const navigate = useNavigate();
 
     //use kycService to get KYC Status ad use it to set isApproved
 
@@ -72,7 +69,7 @@ export function Profile() {
 
     function handleSubmit() {
         kycService.initiateKYC(token, file!);
-        navigate('/dashboard/profile');
+        setIsApproved(true);
     }
 
     return (

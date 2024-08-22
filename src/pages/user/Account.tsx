@@ -1,10 +1,19 @@
-import React, { useState } from "react";
-import { AccountCard, AccountType, LinkedBanksCard, LinkedBanksCardType, PaymentMethodCard, PaymentMethodType } from '../../components/user/accounts'
+import React, { useEffect, useState } from "react";
+import { LinkedBanksCard, LinkedBanksCardType, PaymentMethodCard, PaymentMethodType, WalletCard } from '../../components/user/accounts'
+import { WalletService } from "../../services";
+import { useAuthContext } from "../../hooks";
+
 export function Account() {
-    const [accounts] = useState<AccountType[]>([
-        { id: 1, name: 'Checking Account', type: 'Checking', balance: 2500 },
-        { id: 2, name: 'Savings Account', type: 'Savings', balance: 10000 }
-    ]);
+    // const [accounts] = useState<AccountType[]>([
+    //     { id: 1, name: 'Checking Account', type: 'Checking', balance: 2500 },
+    //     { id: 2, name: 'Savings Account', type: 'Savings', balance: 10000 }
+    // ]);
+
+    const { token } = useAuthContext();
+
+    const walletService = new WalletService();
+
+    const [walletExists, setWalletExists] = useState<boolean>(false);
 
     const [linkedBanks] = useState<LinkedBanksCardType[]>([
         { id: 1, name: 'Bank of America', accountNumber: '****1234' },
@@ -14,13 +23,44 @@ export function Account() {
         { id: 1, type: 'Credit Card', last4: '5678', expiryDate: '12/24' },
     ]);
 
+    async function checkWallet() {
+        walletService.getBalance(token).then((result) => {
+            if(result) {
+                console.log(result)
+                if(result.error) {
+                    setWalletExists(false)
+                }
+                else {
+                    setWalletExists(true)
+                }
+            }
+        })
+    }
+
+    async function createWallet() {
+        walletService.createWallet(token).then((result) => {
+            if(result) {
+                console.log(result)
+                if(!result.error) {
+                    console.log("Here")
+                    setWalletExists(true)
+                }
+            }
+        })
+    }
+    
+    useEffect(() => {
+        checkWallet()
+    }, [])
+
     return (
         <div className="space-y-6">
             <div className="px-6">
-                <AccountCard 
-                accounts={accounts} 
-                handleRemoveAccount={() => {}}
-                handleAddAccount={() => {}}/>
+                <WalletCard
+                    balance={0}
+                    walletExists={walletExists}
+                    handleCreateWallet={createWallet}
+                />
             </div>
 
             <div className="px-6">
@@ -36,6 +76,8 @@ export function Account() {
                 handleRemovePaymentMethod={() => {} }
                 handleAddPaymentMethod={() => {}}/>
             </div>
+
+            
         </div>
     )
 }

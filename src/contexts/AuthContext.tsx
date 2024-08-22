@@ -7,6 +7,7 @@ export const AuthContext = createContext<AuthContextType | undefined>(undefined)
 export function AuthProvider({ children } : { children : ReactNode}) {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(localStorage.getItem('token') !== null); // Use null for loading state
     const [user, setUser] = useState<User | null>(JSON.parse(localStorage.getItem('user') || 'null'));
+    const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
 
     const authService = new AuthService();
 
@@ -24,6 +25,7 @@ export function AuthProvider({ children } : { children : ReactNode}) {
             if(response.token && response.user) {
                 localStorage.setItem('token', response.token)
                 localStorage.setItem('user', JSON.stringify(response.user))
+                setToken(response.token)
                 setUser(response.user)
                 setIsAuthenticated(true);
             }
@@ -40,7 +42,7 @@ export function AuthProvider({ children } : { children : ReactNode}) {
     }
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, user, handleLogin, handleLogout }}>
+        <AuthContext.Provider value={{ isAuthenticated, token, user, handleLogin, handleLogout }}>
             {children}
         </AuthContext.Provider>
     );

@@ -12,12 +12,12 @@ export function Login() {
 
     const { handleLogin } = useAuthContext();
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     async function handleSubmit(email: string, password: string) {
         console.log('Login attempt:', email, password);
         await handleLogin(email, password);
-        navigate('/dashboard')
+        // navigate('/dashboard')
     }
     return (
         <div>

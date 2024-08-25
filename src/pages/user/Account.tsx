@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { LinkedBanksCard, LinkedBanksCardType, PaymentMethodCard, PaymentMethodType, WalletCard } from '../../components/user/accounts'
+import { PaymentMethodCard, PaymentMethodType, WalletCard } from '../../components/user/accounts'
 import { WalletService } from "../../services";
 import { useAuthContext } from "../../hooks";
 
@@ -15,11 +15,7 @@ export function Account() {
 
     const [walletExists, setWalletExists] = useState<boolean>(false);
 
-    const [linkedBanks] = useState<LinkedBanksCardType[]>([
-        { id: 1, name: 'Bank of America', accountNumber: '****1234' },
-    ]);
-
-    const [paymentMethods] = useState<PaymentMethodType[]>([
+    const [paymentMethods, setPaymentMethods] = useState<PaymentMethodType[]>([
         { id: 1, type: 'Credit Card', last4: '5678', expiryDate: '12/24' },
     ]);
 
@@ -48,9 +44,36 @@ export function Account() {
             }
         })
     }
+
+    async function addPaymentMethod(paymentMethodId : string) {
+        walletService.addPaymentMethod(token, paymentMethodId).then((result) => {
+            if(result) {    
+                console.log(result)
+            }
+        })
+
+        listPaymentMethods()
+    }
+
+    async function listPaymentMethods() {
+        walletService.listPaymentMethods(token).then((result) => {
+            if(result) {
+                const mapped : PaymentMethodType[] = result.map((method : any) => {
+                    return {
+                        id: method.id,
+                        type: method.type,
+                        last4: method.card.last4,
+                        expiryDate: `${method.card.expMonth}/${method.card.expYear.toString().slice(-2)}`
+                    }
+                })
+                setPaymentMethods(mapped)
+            }
+        })
+    }
     
     useEffect(() => {
         checkWallet()
+        listPaymentMethods()
     }, [])
 
     return (
@@ -64,17 +87,10 @@ export function Account() {
             </div>
 
             <div className="px-6">
-                <LinkedBanksCard 
-                linkedBanks={linkedBanks}
-                handleRemoveBank={() => {} }
-                handleLinkBank={() => {}}/>
-            </div>
-
-            <div className="px-6">
                 <PaymentMethodCard 
                 paymentMethods={paymentMethods}
                 handleRemovePaymentMethod={() => {} }
-                handleAddPaymentMethod={() => {}}/>
+                handleAddPaymentMethod={addPaymentMethod}/>
             </div>
 
             

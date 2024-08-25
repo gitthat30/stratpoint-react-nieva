@@ -127,4 +127,23 @@ export class WalletService {
             console.error('Network or Server Error');
         }
     }
+
+    async listPaymentMethods(token: string | null) {
+        const response = await fetch('http://localhost:3000/api/wallet/payment-methods', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error('Error:', errorData.message || errorData);
+            return errorData
+        } else {
+            const result = await response.json();
+            return result
+        }
+    }
 }

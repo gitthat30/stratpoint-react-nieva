@@ -10,14 +10,17 @@ export function Login() {
     const [ email, setEmail ] = useState<string>('');
     const [ password, setPassword ] = useState<string>('');
 
-    const { handleLogin } = useAuthContext();
+    const { handleLogin, token } = useAuthContext();
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     async function handleSubmit(email: string, password: string) {
         console.log('Login attempt:', email, password);
-        await handleLogin(email, password);
-        // navigate('/dashboard')
+        await handleLogin(email, password)
+        if(token) {
+            navigate('/dashboard')
+        }
+
     }
     return (
         <div>

@@ -12,7 +12,7 @@ export type PaymentMethodType = {
 interface PaymentMethod {
     paymentMethods : PaymentMethodType[],
     handleRemovePaymentMethod: (id: number) => void
-    handleAddPaymentMethod: (e: React.FormEvent, cardNumber: string, expiryDate: string, cvv: string) => void
+    handleAddPaymentMethod: (paymentMethodId: string) => void
 }
 
 export function PaymentMethodCard( { paymentMethods, handleRemovePaymentMethod, handleAddPaymentMethod }: PaymentMethod) {

@@ -1,4 +1,6 @@
 export * from './AuthContext'
 export * from './TabContext'
 export * from './SettingsContext'
+export * from './WalletContext'
+export * from './KYCContext'
 export * from './types'

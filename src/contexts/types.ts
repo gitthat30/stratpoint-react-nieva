@@ -4,6 +4,7 @@ export interface AuthContextType {
     user : User | null;
     handleLogin : (email : string, password : string) => void;
     handleLogout : () => void;
+    checkToken : (token : string | null) => Promise<any>;
 }
 
 export interface User {
@@ -43,4 +44,24 @@ export type SettingsType = {
 export interface SettingsContextType {
     settings: SettingsType,
     setSettings : (settings: SettingsType) => void
+}
+
+export interface WalletContextType {
+    balance: number;
+    walletExists: boolean;
+    checkWallet: () => Promise<any>;
+    paymentMethods: PaymentMethodType[];
+    checkPaymentMethods: () => Promise<any>;
+}
+
+export type PaymentMethodType = {
+    id: number
+    type: string
+    last4: string
+    expiryDate: string
+}
+
+export interface KYCContextType {
+    kycApproved: boolean;
+    checkKYCStatus: () => Promise<any>;
 }

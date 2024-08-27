@@ -14,7 +14,7 @@ export class KYCService {
                 const errorData = await response.json();
                 console.error('Error:', errorData.message || errorData);
 
-                return "Error"
+                return errorData
             } else {
                 const result = await response.json();
 

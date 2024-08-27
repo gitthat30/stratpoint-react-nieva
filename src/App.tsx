@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Login } from './pages';
 import { Home, Account, StorePurchase, Transactions, Notifications, Profile, Settings } from './pages/user';
-import { AuthProvider, TabProvider, Tab, SettingsProvider } from './contexts';
+import { AuthProvider, TabProvider, Tab, SettingsProvider, WalletProvider, KYCProvider } from './contexts';
 import { useAuthContext, useSettingsContext, useTabContext } from './hooks';
 import { BrowserRouter as Router, Route, Routes, Navigate, Outlet, useNavigate } from 'react-router-dom';
 import { Sidebar, Header } from './components';
@@ -20,13 +20,21 @@ function App() {
 
 
 function SecureRoutes() {
-  const { isAuthenticated, user } = useAuthContext();
+  const { isAuthenticated, checkToken, token } = useAuthContext();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
-    console.log('SecureRoutes rendered. isAuthenticated:', isAuthenticated);
-    console.log('SecureRoutes rendered. email:', user);
-  }, [isAuthenticated]);
+    async function validateToken() {
+        const result = await checkToken(token);
+        if (result?.error == "Token expired.") {
+            // Token expired, redirect to login
+            navigate('/login');
+        }
+    }
 
+    validateToken();
+  })
 
   if(!isAuthenticated) {
     return <Navigate to="/login" replace />
@@ -40,15 +48,19 @@ function AppRoutes() {
   return (
     <TabProvider>
       <SettingsProvider>
-        <Routes>
-          <Route element={<SecureRoutes />}>
-            <Route path="/dashboard/*" element={<UserRoutes />} />
-          </Route>
-          
-          <Route path="/" element={isAuthenticated ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>
+        <WalletProvider>
+          <KYCProvider>
+            <Routes>
+              <Route element={<SecureRoutes />}>
+                <Route path="/dashboard/*" element={<UserRoutes />} />
+              </Route>
+              
+              <Route path="/" element={isAuthenticated ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+            </Routes>
+          </KYCProvider>
+        </WalletProvider>
       </SettingsProvider>
     </TabProvider>
     

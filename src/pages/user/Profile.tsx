@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ProfileField } from "../../components/user/profile";
 import { User, Mail } from "lucide-react";
 import { useAuthContext } from "../../hooks";
 import { KYCField } from "../../components/user/profile/KYCField/KYCField";
 import { KYCService } from "../../services";
+import { useKYCContext } from "../../hooks";
 
 type ProfileType = {
     name: string | null,
@@ -13,19 +14,9 @@ type ProfileType = {
 export function Profile() {
     const { user, token } = useAuthContext();
     const [ file, setFile ] = useState<File | null>(null);
-    const [ isApproved, setIsApproved ] = useState<boolean>(false);
+    const { kycApproved, checkKYCStatus } = useKYCContext();
 
     const kycService = new KYCService();
-
-    //use kycService to get KYC Status ad use it to set isApproved
-
-    useEffect(() => {
-        checkKYCStatus();
-    }, [])
-
-    useEffect(() => {
-        console.log(isApproved)
-    }, [isApproved])
 
     const [profile, setProfile] = useState<ProfileType>({
         name: `${user?.firstName} ${user?.lastName}`,
@@ -33,18 +24,6 @@ export function Profile() {
     });
 
     const [isEditing] = useState<boolean>(false);
-    
-    async function checkKYCStatus() {
-        const status = await kycService.getKYCStatus(token);
-        console.log(status)
-        
-        if(status === "approved") {
-            setIsApproved(true);
-        }
-        else {
-            setIsApproved(false);
-        }
-    }
 
     // function handleEdit() {
     //     setIsEditing(true);
@@ -69,7 +48,7 @@ export function Profile() {
 
     function handleSubmit() {
         kycService.initiateKYC(token, file!);
-        setIsApproved(true);
+        checkKYCStatus();
     }
 
     return (
@@ -123,7 +102,7 @@ export function Profile() {
                 <div className="space-y-3 px-4 py-5 sm:px-6">
                     <h3 className="text-lg leading-6 font-medium text-header-text">KYC Status</h3>
 
-                    {isApproved ? (
+                    {kycApproved ? (
                         <div className="text-lg text-green-600 font-small">Your KYC is approved!</div>
                     ) : (
                         <KYCField

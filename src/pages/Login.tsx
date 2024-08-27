@@ -18,7 +18,7 @@ export function Login() {
         console.log('Login attempt:', email, password);
         await handleLogin(email, password)
         if(token) {
-            navigate('/dashboard')
+            navigate('/dashboard/home')
         }
 
     }

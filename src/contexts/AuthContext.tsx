@@ -1,6 +1,6 @@
 import React, { createContext, ReactNode, useState } from 'react';
 import { AuthContextType, User } from './types';
-import { AuthService } from '../services';
+import { AuthService, KYCService } from '../services';
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -10,9 +10,36 @@ export function AuthProvider({ children } : { children : ReactNode}) {
     const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
 
     const authService = new AuthService();
+    const kycService = new KYCService();
 
+    async function checkToken(token : string | null) {
+        try {
+            const result = await kycService.getKYCStatus(token)
+            if(result) {
+                console.log(result)
+                console.log("This is here")
+                console.log("Error ", result)
+                if(result.error === "Token expired.") {
+                    console.log("Token expired")
+                    localStorage.removeItem('token')
+                    localStorage.removeItem('user')
+                    setIsAuthenticated(false);
+                    setToken(null);
+                    setUser(null);
+
+                    return result
+                }
+                else {
+                    console.log("None")
+                    return result
+                }
+            }
+        }
+        catch {
+            console.error('Network or Server Error');
+        }
+    }
     
-
     async function handleLogin(email : string, password: string) {
         // localStorage.setItem("email", email);
         // setEmail(email);
@@ -45,7 +72,7 @@ export function AuthProvider({ children } : { children : ReactNode}) {
     }
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, token, user, handleLogin, handleLogout }}>
+        <AuthContext.Provider value={{ isAuthenticated, token, user, handleLogin, handleLogout, checkToken }}>
             {children}
         </AuthContext.Provider>
     );

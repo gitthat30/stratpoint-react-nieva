@@ -1,3 +1,5 @@
 export * from './useAuthContext'
 export * from './useTabContext'
 export * from './useSettingsContext'
+export * from './useWalletContext'
+export * from './useKYCContext'

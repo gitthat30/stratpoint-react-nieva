@@ -1,13 +1,8 @@
 import React from "react";
 import { Trash2 } from "lucide-react";
 import { PaymenMethodForm } from "../PaymentMethodForm/PaymentMethodForm"; 
+import { PaymentMethodType } from "../../../../contexts";
 
-export type PaymentMethodType = {
-    id: number
-    type: string
-    last4: string
-    expiryDate: string
-}
 
 interface PaymentMethod {
     paymentMethods : PaymentMethodType[],

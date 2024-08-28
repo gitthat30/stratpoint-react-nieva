@@ -1,11 +1,5 @@
 import React from "react";
-
-export type Transaction = {
-    id: number;
-    date: string;
-    description: string;
-    amount: number;
-};
+import { Transaction } from "../../../../services";
 
 export interface TransactionCardProps {
     transactions: Transaction[];
@@ -24,9 +18,9 @@ export function TransactionCard( { transactions }: TransactionCardProps ) {
                 </thead>
             <tbody className="bg-card-background divide-y divide-border">
                 {transactions.map((transaction) => (
-                <tr key={transaction.id}>
-                    <td className="px-6 py-4 text-sm text-card-header">{transaction.date}</td>
-                    <td className="px-6 py-4 text-sm text-card-header">{transaction.description}</td>
+                <tr key={transaction._id}>
+                    <td className="px-6 py-4 text-sm text-card-header">{transaction.createdAt}</td>
+                    <td className="px-6 py-4 text-sm text-card-header">{transaction.type}</td>
                     <td className={`px-6 py-4 text-sm text-right font-medium ${transaction.amount >= 0 ? 'text-green-600' : 'text-red-600'}`}>
                     ${Math.abs(transaction.amount).toFixed(2)}
                     </td>

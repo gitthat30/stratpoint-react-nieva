@@ -1,27 +1,32 @@
 import React from "react";
+import { useZxing } from "react-zxing"
 
 interface QRScannerProps {
     onScan: (code: string) => void;
+    qrCodeUrl: string | null;
 }
 
-export function QRScanner( { onScan }: QRScannerProps ) {
+export function QRScanner( { qrCodeUrl } : QRScannerProps) {
+    const { ref } = useZxing({
+        onDecodeResult(result) {
+          console.log(result)
+        },
+      });
+
     return (
         <div className="bg-gray-200 p-4 rounded-lg text-center">
-            <p className="mb-2">Scanning QR Code...</p>
-            <input 
-                type="text" 
-                placeholder="Enter QR code" 
-                className="p-2 border rounded"
-                onKeyPress={(e : React.KeyboardEvent<HTMLInputElement>) => {
-                    if (e.key === 'Enter') {
-                        onScan(e.currentTarget.value);
-                        e.currentTarget.value = '';
-                    }
-                }}
-            />
-            <p className="mt-2 text-sm text-gray-600">
-                (In a real app, this would use the device's camera)
-            </p>
+            {qrCodeUrl ? (
+                <>
+                    <img src={qrCodeUrl} alt="QR Code" className="mb-2 w-32 h-32" />
+                    <video ref={ref} />
+                </>
+                    
+                    
+                ) : (
+                    <>
+                        <video ref={ref} />
+                     </>
+                )}
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, CreditCard, DollarSign, Bell, User, Settings, LogOut, ShoppingBag } from 'lucide-react';
+import { Home, CreditCard, DollarSign, User, Settings, LogOut,  QrCodeIcon } from 'lucide-react';
 import { useTabContext } from '../../../../hooks/useTabContext';
 import { Tab } from '../../../../contexts/types';
 import { useAuthContext } from '../../../../hooks';
@@ -9,8 +9,7 @@ const sidebarLinks = [
     { icon: <Home />, label: 'Home', key: Tab.HOME },
     { icon: <CreditCard />, label: 'Accounts', key: Tab.ACCOUNTS },
     { icon: <DollarSign />, label: 'Transactions', key: Tab.TRANSACTIONS },
-    { icon: <ShoppingBag />, label: 'Store Purchase', key: Tab.STORE_PURCHASE },
-    { icon: <Bell />, label: 'Notifications', key: Tab.NOTIFICATIONS },
+    { icon: <QrCodeIcon />, label: 'Payment QR', key: Tab.STORE_PURCHASE },
     { icon: <User />, label: 'Profile', key: Tab.PROFILE },
     { icon: <Settings />, label: 'Settings', key: Tab.SETTINGS }
   ];

@@ -5,11 +5,7 @@ import { useAuthContext, useKYCContext } from "../../hooks";
 import { useWalletContext } from "../../hooks/useWalletContext";
 
 export function Account() {
-    // const [accounts] = useState<AccountType[]>([
-    //     { id: 1, name: 'Checking Account', type: 'Checking', balance: 2500 },
-    //     { id: 2, name: 'Savings Account', type: 'Savings', balance: 10000 }
-    // ]);
-
+    
     const { token } = useAuthContext();
 
     const walletService = new WalletService();

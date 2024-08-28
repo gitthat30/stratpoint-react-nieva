@@ -1,18 +1,31 @@
-import React, { useState } from "react";
-import { SearchBar, TransactionCard, Transaction } from "../../components/user/transactions";
+import React, { useEffect, useState } from "react";
+import { SearchBar, TransactionCard } from "../../components/user/transactions";
+import { WalletService } from "../../services";
+import { useAuthContext } from "../../hooks";
+import { Transaction } from "../../services";
 
 
 export function Transactions() {
-    const [ transactions ] = useState<Transaction[]>([
-        { id: 1, date: '2022-01-01', description: 'Groceries', amount: 100 },
-        { id: 2, date: '2022-01-02', description: 'Dinner with Family', amount: -50 },
-        { id: 3, date: '2022-01-03', description: 'Coffee', amount: -10 }
-    ]);
     const [ searchTerm, setSearchTerm ] = useState<string>('');
+    const [ transactions, setTransactions ] = useState<Transaction[]>([]);
 
     const filteredTransactions = transactions.filter((transaction) => {
-        return transaction.description.toLowerCase().includes(searchTerm.toLowerCase());
+        return transaction.type.toLowerCase().includes(searchTerm.toLowerCase());
     });
+
+    const walletService = new WalletService();
+
+    const { token } = useAuthContext();
+
+    async function checkTransactions() {
+        const result = await walletService.listTransactions(token);
+        setTransactions(result)
+        console.log(result)
+    }
+
+    useEffect(() => {
+        checkTransactions();
+    }, [])
 
     return (
         <div className="space-y-6">
